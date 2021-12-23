@@ -1,0 +1,106 @@
+<div *ngIf="!isShow && !isSpin">
+
+
+<div class="main">
+    <div class="inner">
+        <img class="demo-bg" src="../../assets/images/logo.jpg" alt="">
+        <div *ngIf="!isShow && !isSpin">
+            <form [formGroup]="input_team" (ngSubmit)="onSubmit()">
+                <label for="input_team">Number Team: </label>
+                <input id="number_team" type="number" formControlName="number_team">
+                <br>
+                <br>
+                <label for="input_team">Numver Player </label>
+                <input id="number_player" type="number" formControlName="number_player">
+                <br>
+                <br>
+                <button class="btn-submit" type="submit">Submit</button>
+            </form>
+
+            <!-- <button class="btn-submit" (click)="ex()">export</button> -->
+        </div>
+    </div>
+
+</div>
+</div>
+<div class="container">
+    <div *ngIf="isShow">
+        <form>
+            <div class="input_play" *ngFor="let item of listPlays; let i = index" [attr.data-index]="i">
+                <ul>
+                    <label for="input_player" style="color: crimson;margin-bottom: 10px;">Player {{ i+1 }} : </label>
+
+                    <input class="input_user" id="{{'name'+i}}" (keyup)="onPlayer(i, $event)">
+                </ul>
+            </div>
+        </form>
+        <button class="btn-submit" (click)="spinRandomPlayer()">Spin</button>
+
+
+    </div>
+
+    <div *ngIf="!isShow && isSpin">
+        <div *ngIf="arraySort.length != 0">
+            <div class="row">
+                <div *ngFor="let id of arraySort; let i = index" [attr.data-index]="i">
+                    <!-- <div class="column"> -->
+                    <div class="{{'column'+i}}">
+
+                        <div *ngIf="i==0">
+                            <h1>Team Xanh </h1>
+                            <div *ngIf="arraySuffer.length != 0">
+                                <div *ngFor="let item of spiceArray(id, arraySuffer); let j = index"
+                                    [attr.data-index]="j">
+                                    <ul>
+                                        <p>Player {{ j +1 }}: {{item}}</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="i==1">
+                            <h1>Team Đỏ</h1>
+                            <div *ngIf="arraySuffer.length != 0">
+                                <div *ngFor="let item of spiceArray(id, arraySuffer); let j = index"
+                                    [attr.data-index]="j">
+                                    <ul>
+                                        <p>Player {{ j +1 }}: {{item}}</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="i==2">
+                            <h1>Team Đồng</h1>
+                            <div *ngIf="arraySuffer.length != 0">
+                                <div *ngFor="let item of spiceArray(id, arraySuffer); let j = index"
+                                    [attr.data-index]="j">
+                                    <ul>
+                                        <p>Player {{ j +1 }}: {{item}}</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="i==3">
+                            <h1>Team Đen</h1>
+                            <div *ngIf="arraySuffer.length != 0">
+                                <div *ngFor="let item of spiceArray(id, arraySuffer); let j = index"
+                                    [attr.data-index]="j">
+                                    <ul>
+                                        <p>Player {{ j +1 }}: {{item}}</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="arraySort.length == 0">
+            <p>else</p>
+        </div>
+
+        <button class="btn-submit" (click)="spinRandomPlayer()">Return Spin</button>
+        <button class="btn-export" (click)="onExcel()">Export excel</button>
+
+    </div>
+</div>
